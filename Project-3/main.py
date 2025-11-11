@@ -14,5 +14,5 @@ blu = Parrot("Blu" ,10)
 woo = Parrot("Woo" ,15)
 
 #Access The Class Attributes
-print("Blu is a {}".format(blu.name ,blu.age))
-print("Woo is also a {}".format(woo.name ,blu.age))
+print(f"{blu.name} is {blu.age} years old and is a {blu.species}.")
+print(f"{woo.name} is {woo.age} years old and is a {woo.species}.")
