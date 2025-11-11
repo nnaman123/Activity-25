@@ -1,28 +1,31 @@
-# Cars Database - Comprehensive List of Cars with Mileage
-# This file contains car data that can be imported into other modules
+# Cars Database - Fetches car data from external JSON file
+# This module imports and manages car data from cars_list.json
 
-cars_database = {
-    "Toyota Camry": 45000,
-    "Honda Civic": 38000,
-    "Ford Mustang": 52000,
-    "BMW 3 Series": 48000,
-    "Mercedes-Benz C-Class": 55000,
-    "Audi A4": 50000,
-    "Volkswagen Jetta": 42000,
-    "Hyundai Elantra": 35000,
-    "Mazda3": 41000,
-    "Nissan Altima": 44000,
-    "Chevrolet Malibu": 39000,
-    "Subaru Legacy": 47000,
-    "Kia Optima": 36000,
-    "Lexus ES 350": 60000,
-    "Infiniti Q50": 58000,
-    "Volvo S60": 56000,
-    "Tesla Model 3": 75000,
-    "Prius": 35000,
-    "Civic Hybrid": 40000,
-    "RAV4": 46000,
-}
+import json
+import os
+
+def load_cars_database():
+    """
+    Load car data from external JSON file (cars_list.json)
+    Returns a dictionary of cars with their mileage
+    """
+    # Get the directory of the current file
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    json_file = os.path.join(current_dir, 'cars_list.json')
+    
+    try:
+        with open(json_file, 'r') as f:
+            data = json.load(f)
+            return data.get('cars', {})
+    except FileNotFoundError:
+        print(f"Error: {json_file} not found!")
+        return {}
+    except json.JSONDecodeError:
+        print(f"Error: {json_file} is not valid JSON!")
+        return {}
+
+# Load the cars database from external JSON file
+cars_database = load_cars_database()
 
 def get_car_mileage(car_name):
     """Returns the mileage of a car given its name"""
